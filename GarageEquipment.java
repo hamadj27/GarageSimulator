@@ -1,3 +1,3 @@
-public class GarageEquipment extends Garage implements Maintainable {
+public class GarageEquipment implements Maintainable {
     
 }
