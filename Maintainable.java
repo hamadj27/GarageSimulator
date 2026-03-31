@@ -1,3 +1,4 @@
 public interface Maintainable {
-    // void performMaintenance();
+    //an abstract method to enforce maintenance implementation
+    void performMaintenance();
 }
