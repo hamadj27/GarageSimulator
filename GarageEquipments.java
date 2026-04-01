@@ -1,7 +1,7 @@
 public class GarageEquipments implements Maintainable {
     private int health;
 
-    public GarageEquipment (int health){
+    public GarageEquipments (int health){
         this.health= health;
     }
 
