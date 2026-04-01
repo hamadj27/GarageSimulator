@@ -1,12 +1,13 @@
 public class Garage {
-    private GarageEquipments equipments;
-    private Vehicle vehicle[];
-    private int numOfVehicles;
-    
+    private  GarageEquipment equipments;
+    private  Vehicle vehicle[];
+    private  int numOfVehicles;
+    private int maxCapacity;
 
     public Garage (int maxCapacity){
-        vehicle = new Vehicle[maxCapacity];
-        numOfVehicles = 0;
+        this.maxCapacity = maxCapacity;
+        this.vehicle = new Vehicle[maxCapacity];
+        this.equipments = new GarageEquipment(100);
     }
     public boolean addVehicle(Vehicle v){
         if(numOfVehicles<vehicle.length){
@@ -15,12 +16,12 @@ public class Garage {
         }return false;
 
     }
-    public  boolean removeVehicle(int plateNum){
+    public boolean removeVehicle(int plateNum){
         for(int i =0;i<numOfVehicles;i++){
-        if(plateNum==vehicle[i].getPlateNum()){
-            vehicle[i]=vehicle[--numOfVehicles];
-            return true;
-        }
+            if(plateNum==vehicle[i].getPlateNum()){
+                vehicle[i]=vehicle[--numOfVehicles];
+                return true;
+            }
         }return false;
 
     }
@@ -38,7 +39,7 @@ public class Garage {
             equipments.use();
             searchVehicle(plateNum, 0).performMaintenance();
             return true;
-        }    
+        }
         return false;
     }
 
