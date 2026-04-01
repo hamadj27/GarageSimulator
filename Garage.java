@@ -1,11 +1,12 @@
 public class Garage {
     private GarageEquipments equipments;
     private Vehicle vehicle[];
-    private int numOfVehicles = 0;
+    private int numOfVehicles;
     
 
     public Garage (int maxCapacity){
         vehicle = new Vehicle[maxCapacity];
+        numOfVehicles = 0;
     }
     public boolean addVehicle(Vehicle v){
         if(numOfVehicles<vehicle.length){
@@ -31,23 +32,20 @@ public class Garage {
 
 
     }
-    public void maintainVehicle(int plateNum){
-        for(int i = 0; i<numOfVehicles;i++) {
-            if (plateNum == vehicle[i].getPlateNum()) {
-                if (equipments.getHealth() < 10) {
-                    vehicle[i].performMaintenance();
-                    ;
-                }
-            }
-        }
-
-
-
-        }
+    public boolean maintainVehicle(int plateNum){
+        if (searchVehicle(plateNum, 0) != null)  {
+            if (equipments.getHealth() < 10) equipments.performMaintenance();
+            equipments.use();
+            searchVehicle(plateNum, 0).performMaintenance();
+            return true;
+        }    
+        return false;
+    }
 
     public void displayAllVehicle(){
         for(int i = 0; i<numOfVehicles;i++){
             vehicle[i].printInfo();
+            System.out.println();
         }
     }
 }
