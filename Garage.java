@@ -32,18 +32,12 @@ public class Garage {
 
     }
     public void maintainVehicle(int plateNum){
-        for(int i = 0; i<=numOfVehicles;i++) {
-            if (plateNum == vehicle[i].getPlateNum()) {
-                if (equipments.getHealth() < 10) {
-                    vehicle[i].performMaintenance();
-                    ;
-                }
-            }
-        }
-
-
-
-        }
+        if (searchVehicle(plateNum, 0) != null) {
+            if (equipments.getHealth() < 10) equipments.performMaintenance();
+            equipments.use();
+            searchVehicle(plateNum, 0).performMaintenance();
+        }    
+    }
 
     public void displayAllVehicle(){
         for(int i = 0; numOfVehicles<=maxCapacity;i++){
