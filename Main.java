@@ -67,7 +67,7 @@ public class Main {
                         System.out.println("Invalid vehicle type selected.");
                         break;
                     }
-                    if (Garage.addVehicle(newVehicle)) {
+                    if (MikeGarage.addVehicle(newVehicle)) {
                         System.out.println("Vehicle successfully added to the garage!");
 
                     } else {
@@ -79,7 +79,7 @@ public class Main {
                 case 2:
                     System.out.print("Enter Plate Number of the vehicle to remove: ");
                     int removePlate = in.nextInt();
-                    if (Garage.removeVehicle(removePlate)) {
+                    if (MikeGarage.removeVehicle(removePlate)) {
                         System.out.println("Vehicle removed successfully!");
 
                     } else {
@@ -90,7 +90,7 @@ public class Main {
                 case 3:
                     System.out.print("Enter Plate Number to search: ");
                     int sP = in.nextInt();
-                    Vehicle foundVehicle = Garage.searchVehicle(sP, 0);
+                    Vehicle foundVehicle = MikeGarage.searchVehicle(sP, 0);
                     if (foundVehicle != null) {
                         System.out.println("--- Vehicle Found ---");
                         foundVehicle.printInfo();
@@ -101,12 +101,12 @@ public class Main {
                 case 4:
                     System.out.print("Enter Plate Number to perform maintenance: ");
                     int mP = in.nextInt();
-                    Garage.maintainVehicle(mP);
+                    MikeGarage.maintainVehicle(mP);
                     System.out.println("Maintenance routine executed.");
                     break;
                 case 5:
                     System.out.println("--- Vehicles currently in Garage ---");
-                    Garage.displayAllVehicle();
+                    MikeGarage.displayAllVehicle();
                     break;
                 case 6:
                     System.out.println("THANKS FOR VISITING MIKE GARAGE");
