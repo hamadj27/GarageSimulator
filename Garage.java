@@ -1,26 +1,26 @@
 public class Garage {
     private GarageEquipments equipments;
     private Vehicle vehicle[];
-    private int numOfVehicles;
-    private int maxCapacity;
+    private int numOfVehicles = 0;
+    
 
     public Garage (int maxCapacity){
-        this.maxCapacity=maxCapacity;
         vehicle = new Vehicle[maxCapacity];
     }
     public boolean addVehicle(Vehicle v){
         if(numOfVehicles<vehicle.length){
-            numOfVehicles++;
+            v = vehicle[numOfVehicles++];
             return true;
         }return false;
 
     }
     public  boolean removeVehicle(int plateNum){
-        for(int i =0;i>=numOfVehicles;i++){
+        for(int i =0;i<numOfVehicles;i++){
         if(plateNum==vehicle[i].getPlateNum()){
-            numOfVehicles--;
+            vehicle[i]=vehicle[numOfVehicles--];
             return true;
-        } }return false;
+        }
+        }return false;
 
     }
     public Vehicle searchVehicle(int plateNum, int i){
@@ -32,15 +32,21 @@ public class Garage {
 
     }
     public void maintainVehicle(int plateNum){
-        if (searchVehicle(plateNum, 0) != null) {
-            if (equipments.getHealth() < 10) equipments.performMaintenance();
-            equipments.use();
-            searchVehicle(plateNum, 0).performMaintenance();
-        }    
-    }
+        for(int i = 0; i<numOfVehicles;i++) {
+            if (plateNum == vehicle[i].getPlateNum()) {
+                if (equipments.getHealth() < 10) {
+                    vehicle[i].performMaintenance();
+                    ;
+                }
+            }
+        }
+
+
+
+        }
 
     public void displayAllVehicle(){
-        for(int i = 0; numOfVehicles<=maxCapacity;i++){
+        for(int i = 0; i<numOfVehicles;i++){
             vehicle[i].printInfo();
         }
     }
