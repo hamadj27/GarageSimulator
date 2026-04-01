@@ -1,4 +1,4 @@
-public class GarageEquipment implements Maintainable {
+public class GarageEquipments implements Maintainable {
     private int health;
 
     public GarageEquipments (int health){
