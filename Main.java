@@ -58,7 +58,7 @@ public class Main {
                         boolean isAWD = in.nextBoolean();
                         newVehicle = new SUV(brand, color, engineSize, cylinders, hp, plateNum, isAWD);
                     } else if (ty == 3) {
-                        System.out.print("Is it AWD? (true/false): ");
+                        System.out.print("Is it All-Wheel-Drive? (true/false): ");
                         boolean isAWD = in.nextBoolean();
                         System.out.print("Has suspension kit? (true/false): ");
                         boolean hasSuspension = in.nextBoolean();
