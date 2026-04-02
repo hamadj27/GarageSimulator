@@ -15,21 +15,21 @@ public class Engine {
     public double getSize() {return size;}
 
     public void setSize(double s) {
-        if (s < 1 && s > 10) throw new IllegalArgumentException("Size must be a number between 1 and 10.");
-        else size = s;
+        // if (s < 1 || s > 10) throw new IllegalArgumentException("Size must be a number between 1 and 10.");
+         size = s;
     }
 
     public int getCylinders() {return cylinders;}
 
     public void setCylinders(int c) {
-        if (c < 4 && c > 16) throw new IllegalArgumentException("Cylinders must be a number between 4 and 16.");
-        else cylinders = c;
+        // if (c < 4 || c > 16) throw new IllegalArgumentException("Cylinders must be a number between 4 and 16.");
+        cylinders = c;
     }
 
     public int getHP() {return horsepower;}
     
     public void setHP(int hp) {
-        if (hp < 50 && hp > 2000) throw new IllegalArgumentException("Horsepower must be a number between 50 and 2000.");
-        else horsepower = hp;
+        // if (hp < 50 || hp > 2000) throw new IllegalArgumentException("Horsepower must be a number between 50 and 2000.");
+        horsepower = hp;
     }
 }

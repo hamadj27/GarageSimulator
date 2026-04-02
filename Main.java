@@ -21,7 +21,7 @@ public class Main {
             System.out.println("4. Maintain a Vehicle");
             System.out.println("5. Display All Vehicles");
             System.out.println("6. Exit");
-            System.out.println("ENTER YOUR CHOICE HERE: ");
+            System.out.print("ENTER YOUR CHOICE HERE: ");
 
             int c = in.nextInt();
             switch (c) {
@@ -101,12 +101,15 @@ public class Main {
                 case 4:
                     System.out.print("Enter Plate Number to perform maintenance: ");
                     int mP = in.nextInt();
-                    MikeGarage.maintainVehicle(mP);
-                    System.out.println("Maintenance routine executed.");
+                    if (MikeGarage.maintainVehicle(mP)) {
+                        System.out.println("Maintenance routine executed.");
+                    } else System.out.println("Vehicle not found.");
                     break;
                 case 5:
+                    if (MikeGarage.getNumOfVehicles() > 0) {
                     System.out.println("--- Vehicles currently in Garage ---");
                     MikeGarage.displayAllVehicle();
+                    } else System.out.println("There are no vehicles currently in the garage.");
                     break;
                 case 6:
                     System.out.println("THANKS FOR VISITING MIKE GARAGE");

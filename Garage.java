@@ -6,6 +6,7 @@ public class Garage {
     public Garage (int maxCapacity){
         this.vehicle = new Vehicle[maxCapacity];
         numOfVehicles = 0;
+        equipments = new GarageEquipments();
     }
     public boolean addVehicle(Vehicle v){
         if(numOfVehicles<vehicle.length){
@@ -48,4 +49,6 @@ public class Garage {
             System.out.println();
         }
     }
+
+    public int getNumOfVehicles() {return numOfVehicles;}
 }
