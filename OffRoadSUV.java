@@ -1,4 +1,6 @@
-public class OffRoadSUV extends SUV {
+import java.io.Serializable;
+
+public class OffRoadSUV extends SUV implements Serializable {
     private boolean hasSuspensionKit;
 
     // a constructor to initializes an Off-Road SUV
