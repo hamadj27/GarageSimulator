@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-public class SUV extends Vehicle implements Serializable {
+public class SUV extends Vehicle {
     protected boolean isAWD;
 
     //a constructor to initializes an SUV

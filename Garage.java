@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.io.*;
 
 public class Garage {
@@ -11,14 +10,14 @@ public class Garage {
         loadDataFromFile();
     }
     public boolean addVehicle(Vehicle v){
-        boolean status = vehicle.add(v);
+        boolean status = vehicle.addLast(v);
         saveDataToFile();
         return status;
     }
     public boolean removeVehicle(int plateNum){
-        for(int i =0;i<vehicle.size();i++){
+        for(int i =0;i<vehicle.getSize();i++){
             if(plateNum==vehicle.get(i).getPlateNum()){
-                vehicle.remove(i);
+                vehicle.removeAt(i);
                 saveDataToFile();
                 return true;
             }
@@ -26,7 +25,7 @@ public class Garage {
 
     }
     public Vehicle searchVehicle(int plateNum, int i){
-        if(i >= vehicle.size()) return  null;
+        if(i >= vehicle.getSize()) return  null;
         Vehicle current = vehicle.get(i);
         if(current.getPlateNum() == plateNum) return current;
 
@@ -47,13 +46,13 @@ public class Garage {
     }
 
     public void displayAllVehicle(){
-        for(int i = 0; i<vehicle.size();i++){
+        for(int i = 0; i<vehicle.getSize();i++){
             vehicle.get(i).printInfo();
             System.out.println();
         }
     }
 
-    public int getNumOfVehicles() {return vehicle.size();}
+    public int getNumOfVehicles() {return vehicle.getSize();}
 
 
     private void loadDataFromFile() {

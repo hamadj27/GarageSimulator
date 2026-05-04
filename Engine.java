@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.LinkedList;
 public class Engine implements Serializable {
     private double size;
     private int cylinders;
@@ -12,6 +11,7 @@ public class Engine implements Serializable {
         setSize(size);
         setCylinders(cylinders);
         setHP(HP);
+
         if (!errors.isEmpty()) throw new EngineExceptions(errors);
     }
 
@@ -20,21 +20,21 @@ public class Engine implements Serializable {
     public double getSize() {return size;}
 
     public void setSize(double s) {
-         if (s < 1 || s > 10) errors.add("Size must be a number between 1 and 10.");
+         if (s < 1 || s > 10) errors.addLast("Size must be a number between 1 and 10.");
          size = s;
     }
 
     public int getCylinders() {return cylinders;}
 
     public void setCylinders(int c) {
-        if (c < 4 || c > 16) errors.add("Cylinders must be a number between 4 and 16.");
+        if (c < 4 || c > 16) errors.addLast("Cylinders must be a number between 4 and 16.");
         cylinders = c;
     }
 
     public int getHP() {return horsepower;}
     
     public void setHP(int hp) {
-        if (hp < 50 || hp > 2000) errors.add("Horsepower must be a number between 50 and 2000.");
+        if (hp < 50 || hp > 2000) errors.addLast("Horsepower must be a number between 50 and 2000.");
         horsepower = hp;
     }
 }

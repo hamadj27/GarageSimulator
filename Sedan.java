@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-public class Sedan extends Vehicle implements Serializable {
+public class Sedan extends Vehicle {
     private boolean isLowered;
 
     //a constructor to initializes a Sedan car
