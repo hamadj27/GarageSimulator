@@ -1,6 +1,6 @@
-public class EngineExceptions extends RuntimeException {
+public class VehicleExceptions extends RuntimeException {
     private LinkedList<String> errors;
-    public EngineExceptions(LinkedList<String> errors) {
+    public VehicleExceptions(LinkedList<String> errors) {
         this.errors = errors;
     }
 
