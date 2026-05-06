@@ -1,4 +1,6 @@
-public class GarageEquipments implements Maintainable {
+import java.io.Serializable;
+
+public class GarageEquipments implements Maintainable, Serializable {
     private int health;
 
     public GarageEquipments (){
@@ -6,7 +8,7 @@ public class GarageEquipments implements Maintainable {
     }
 
     public void use(){
-        health=-10;
+        health-=10;
     }
 
     public void performMaintenance(){
