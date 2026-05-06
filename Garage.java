@@ -34,7 +34,7 @@ public class Garage {
 
 
     }
-    public Vehicle maintainVehicle(int plateNum) throws VehicleExceptions {
+    public Vehicle maintainVehicle(int plateNum) {
         Vehicle targetVehicle = searchVehicle(plateNum, 0);
         if (targetVehicle == null)  return null;
         if (targetVehicle.isReady() == true) throw new VehicleExceptions("Vehicle Already Maintained");
