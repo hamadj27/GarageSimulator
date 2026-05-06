@@ -7,11 +7,11 @@ public class SUV extends Vehicle {
         this.isAWD = isAWD;
     }
 
-    //prints the detailed information specific to the SUV
-    void printInfo() {
-        System.out.println("Type: SUV  |  Brand: " + getBrand() + "  |  Color: " + getColor() + "  |  All Wheel Drive?: " + (isAWD ? "Yes" : "No") +
+    //returns the detailed information specific to the SUV
+    public String displayInfo() {
+        return "Type: SUV  |  Brand: " + getBrand() + "  |  Color: " + getColor() + "  |  All Wheel Drive?: " + (isAWD ? "Yes" : "No") +
         "\nEngine: " + getEngine().getCylinders() + " Cylinders, " + getEngine().getSize() + "L, " + getEngine().getHP() + 
-        "hp\nPlate Number: " + getPlateNum() + "  |  Status: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]");
+        "hp\nPlate Number: " + getPlateNum() + "  |  Status: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]";
         
     }
 }

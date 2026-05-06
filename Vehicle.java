@@ -15,8 +15,8 @@ public abstract class Vehicle implements Maintainable, Serializable {
         isReady = false;
     }
 
-    //abstract method to print vehicle details, implemented by child classes
-    abstract void printInfo();
+    //abstract method to return vehicle details, implemented by child classes
+    abstract String displayInfo();
 
     //executes the maintenance process for the vehicle
     public void performMaintenance() {isReady = true;}

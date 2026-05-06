@@ -14,14 +14,15 @@ public class Garage {
         saveDataToFile();
         return status;
     }
-    public boolean removeVehicle(int plateNum){
+    public Vehicle removeVehicle(int plateNum){
         for(int i =0;i<vehicle.getSize();i++){
-            if(plateNum==vehicle.get(i).getPlateNum()){
+            Vehicle current = vehicle.get(i);
+            if(plateNum==current.getPlateNum()){
                 vehicle.removeAt(i);
                 saveDataToFile();
-                return true;
+                return current;
             }
-        }return false;
+        }return null;
 
     }
     public Vehicle searchVehicle(int plateNum, int i){
@@ -45,11 +46,11 @@ public class Garage {
         return false;
     }
 
-    public void displayAllVehicle(){
+    public String displayAllVehicle(){
+        String txt = "";
         for(int i = 0; i<vehicle.getSize();i++){
-            vehicle.get(i).printInfo();
-            System.out.println();
-        }
+            txt += vehicle.get(i).displayInfo() + "\n";
+        } return txt;
     }
 
     public int getNumOfVehicles() {return vehicle.getSize();}

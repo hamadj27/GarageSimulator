@@ -7,11 +7,11 @@ public class Sedan extends Vehicle {
         this.isLowered = isLowered;
     }
 
-    //prints the detailed information specific to the Sedan 
-    void printInfo() {
-        System.out.println("Type: Sedan  |  Brand: " + getBrand() + "  |  Color: " + getColor() + "  |  Is Lowered?: " + (isLowered ? "Yes" : "No") +
+    //returns the detailed information specific to the Sedan
+    public String displayInfo() {
+        return "Type: Sedan  |  Brand: " + getBrand() + "  |  Color: " + getColor() + "  |  Is Lowered?: " + (isLowered ? "Yes" : "No") +
         "\nEngine: " + getEngine().getCylinders() + " Cylinders, " + getEngine().getSize() + "L, " + getEngine().getHP() + 
-        "hp\nPlate Number: " + getPlateNum() + "  |  Status: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]");
+        "hp\nPlate Number: " + getPlateNum() + "  |  Status: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]";
         
     }
 }
