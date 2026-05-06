@@ -26,7 +26,8 @@ public class InfoFrame extends JFrame {
 
 
         textArea.setEditable(false);
-        textArea.setFont(new Font(Design.FONT, Font.PLAIN, 18));
+        textArea.setFont(new Font(Design.FONT, Font.PLAIN, 22));
+        textArea.setMargin(new Insets(8,8,8,8));
         textArea.setText(info);
 
         scroll.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -36,7 +37,7 @@ public class InfoFrame extends JFrame {
 
 
         panel.add(title);
-        panel.add(Box.createVerticalStrut(5));
+        panel.add(Box.createVerticalStrut(7));
         panel.add(scroll);
         panel.add(Box.createVerticalStrut(50));
         panel.add(backButton);
@@ -50,6 +51,6 @@ public class InfoFrame extends JFrame {
     }
 
     public void setInfo(String info) {
-        this.info = info;
+        textArea.setText(info);
     }
 }

@@ -20,9 +20,9 @@ public class InputFrame extends JFrame {
 
 
     private JCheckBox checkBox = new JCheckBox();
-    private String sedanText = "Is Lowered?";
-    private String SUVText = "Is FOUR-WHEEL-DRIVE?";
-    private String offRoadText = "Has Suspention Kit?";
+    private final String sedanText = "Is Lowered?";
+    private final String SUVText = "Is FOUR-WHEEL-DRIVE?";
+    private final String offRoadText = "Has Suspention Kit?";
 
 
     JButton saveButton = new JButton("SAVE");
@@ -113,5 +113,23 @@ public class InputFrame extends JFrame {
         else if (selected.equals("Off-Road SUV")) checkBox.setText(offRoadText);
         checkBox.setSelected(false);
     }
+
+    public String getActiveType() {
+        return switch(checkBox.getText()) {
+            case sedanText -> "sedan";
+            case SUVText -> "suv";
+            case offRoadText -> "offRoad";
+            default -> null;
+        };
+    }
+
+
+    public String getBrand() {return brandIn.getText();}
+    public String getColor() {return colorIn.getText();}
+    public double getEngineSize() throws NumberFormatException {return Double.parseDouble(engineSizeIn.getText());}
+    public int getCylinders() throws NumberFormatException {return Integer.parseInt(cylindersIn.getText());}
+    public int getHP() throws NumberFormatException {return Integer.parseInt(hpIn.getText());}
+    public int getPlate() throws NumberFormatException {return Integer.parseInt(plateIn.getText());}
+    public boolean getCheckBox() {return checkBox.isSelected();}
 
 }

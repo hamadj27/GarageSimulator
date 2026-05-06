@@ -55,6 +55,7 @@ public abstract class Vehicle implements Maintainable, Serializable {
     private void setPlateNum(int p, LinkedList<String> errors) {
         if (p < 0) errors.addLast("Plate number cannot be negative.");
         else if (p == 0) errors.addLast("Plate number cannot be ZERO.");
+        else if (Integer.toString(p).length() > 4) errors.addLast("Plate number cannot more than 4 numbers");
         else
         this.plateNum = p;
     }

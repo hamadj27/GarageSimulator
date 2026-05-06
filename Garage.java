@@ -34,22 +34,22 @@ public class Garage {
 
 
     }
-    public boolean maintainVehicle(int plateNum){
+    public Vehicle maintainVehicle(int plateNum) throws VehicleExceptions {
         Vehicle targetVehicle = searchVehicle(plateNum, 0);
-        if (targetVehicle != null)  {
-            if (equipments.getHealth() < 10) equipments.performMaintenance();
-            equipments.use();
-            targetVehicle.performMaintenance();
-            saveDataToFile();
-            return true;
-        }
-        return false;
+        if (targetVehicle == null)  return null;
+        if (targetVehicle.isReady() == true) throw new VehicleExceptions("Vehicle Already Maintained");
+
+        if (equipments.getHealth() < 10) equipments.performMaintenance();
+        equipments.use();
+        targetVehicle.performMaintenance();
+        saveDataToFile();
+        return targetVehicle;
     }
 
     public String displayAllVehicle(){
         String txt = "";
         for(int i = 0; i<vehicle.getSize();i++){
-            txt += vehicle.get(i).displayInfo() + "\n";
+            txt += "Vehicle (" + (i + 1) + "):\n\n" + vehicle.get(i).displayInfo() + "\n--------------------------------------------\n";
         } return txt;
     }
 

@@ -8,7 +8,7 @@ public class GarageEquipments implements Maintainable, Serializable {
     }
 
     public void use(){
-        health=-10;
+        health-=10;
     }
 
     public void performMaintenance(){

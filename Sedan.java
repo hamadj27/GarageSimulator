@@ -9,9 +9,9 @@ public class Sedan extends Vehicle {
 
     //returns the detailed information specific to the Sedan
     public String displayInfo() {
-        return "Type: Sedan  |  Brand: " + getBrand() + "  |  Color: " + getColor() + "  |  Is Lowered?: " + (isLowered ? "Yes" : "No") +
-        "\nEngine: " + getEngine().getCylinders() + " Cylinders, " + getEngine().getSize() + "L, " + getEngine().getHP() + 
-        "hp\nPlate Number: " + getPlateNum() + "  |  Status: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]";
+        return "Type: Sedan\nBrand: " + getBrand() + "\nColor: " + getColor() + "\nIs Lowered?: " + (isLowered ? "Yes" : "No") +
+        "\nEngine: " + getEngine().getCylinders() + " Cylinders, " + getEngine().getSize() + "L, " + getEngine().getHP() +
+        "hp\nPlate Number: " + getPlateNum() + "\nStatus: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]";
         
     }
 }

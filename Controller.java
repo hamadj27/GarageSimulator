@@ -15,6 +15,7 @@ public class Controller implements ActionListener {
 
         homeFrame.setListener(this);
         inputFrame.setListener(this);
+        infoFrame.setListener(this);
     }
 
 
@@ -22,30 +23,58 @@ public class Controller implements ActionListener {
         switch (e.getActionCommand()) {
             case "ADD":
                 homeFrame.setVisible(false);
+                inputFrame.setLocation(homeFrame.getLocation());
                 inputFrame.setVisible(true);
                 break;
             case "REMOVE":
-                String plate = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Remove");
-                Vehicle removed = garage.removeVehicle(Integer.parseInt(plate));
-                if(removed != null)
-                JOptionPane.showMessageDialog(homeFrame, removed.getBrand() + " Have Been Removed Successfully");
-                else JOptionPane.showMessageDialog(homeFrame, "No Car Found With A Plate Number [" + plate + "]");
+                try {
+                    String plate = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Remove").strip();
+                    Vehicle removed = garage.removeVehicle(Integer.parseInt(plate));
+                    if (removed != null)
+                        JOptionPane.showMessageDialog(homeFrame, removed.getBrand() + " Have Been Removed Successfully");
+                    else
+                        JOptionPane.showMessageDialog(homeFrame, "No Car Found With" + (plate.length() > 4 ? " That Plate Number" :" A Plate Number [" + plate + "]"),"ERROR", JOptionPane.ERROR_MESSAGE);
+                } catch(NumberFormatException err) {
+                    JOptionPane.showMessageDialog(homeFrame, "Plate Number Should contain Only NUMBERS","ERROR", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "SEARCH":
-                String target = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Search For");
+                try {
+                    String target = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Search For").strip();
 
-                garage.searchVehicle(Integer.parseInt(target), 0);
+                    Vehicle found = garage.searchVehicle(Integer.parseInt(target), 0);
+                    if (found == null) {
+                        JOptionPane.showMessageDialog(homeFrame,"No Car Found With" + (target.length() > 4 ? " That Plate Number" :" A Plate Number [" + target + "]"),"ERROR", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(homeFrame, found.displayInfo());
+                    }
+                } catch (NumberFormatException err) {
+                    JOptionPane.showMessageDialog(homeFrame, "Plate Number Should contain Only NUMBERS","ERROR", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "MAINTAIN":
-                String car = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Maintain");
+                try {
+                    String car = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Maintain").strip();
 
-                garage.maintainVehicle(Integer.parseInt(car));
+                    Vehicle v = garage.maintainVehicle(Integer.parseInt(car));
+                    if (v == null) {
+                        JOptionPane.showMessageDialog(homeFrame, "No Car Found With" + (car.length() > 4 ? " That Plate Number" :" A Plate Number [" + car + "]"), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(homeFrame,v.getBrand() + " Maintained Successfully");
+                    }
+                } catch (NumberFormatException err) {
+                    JOptionPane.showMessageDialog(homeFrame, "Plate Number Should contain Only NUMBERS", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } catch (VehicleExceptions err) {
+                    JOptionPane.showMessageDialog(homeFrame, err.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+
                 break;
             case "DISPLAY":
-                if (garage.getNumOfVehicles() <= 0) JOptionPane.showMessageDialog(homeFrame, "There Are No Vehicles In The Garage To Display");
+                if (garage.getNumOfVehicles() <= 0) JOptionPane.showMessageDialog(homeFrame, "There Are No Vehicles In The Garage To Display","ERROR", JOptionPane.ERROR_MESSAGE);
                 else {
                     infoFrame.setInfo(garage.displayAllVehicle());
                     homeFrame.setVisible(false);
+                    infoFrame.setLocation(homeFrame.getLocation());
                     infoFrame.setVisible(true);
                 }
                 break;
@@ -54,13 +83,33 @@ public class Controller implements ActionListener {
 
                 break;
             case "SAVE":
+                    try {
+                        if (inputFrame.getActiveType() == "sedan")
+                            garage.addVehicle(new Sedan(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox()));
+                        else if (inputFrame.getActiveType() == "suv")
+                            garage.addVehicle(new SUV(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox()));
+                        else if (inputFrame.getActiveType() == "offRoad")
+                            garage.addVehicle(new Sedan(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox()));
 
+                        homeFrame.setLocation(inputFrame.getLocation());
+                        inputFrame.dispose();
+                        homeFrame.setVisible(true);
+                        JOptionPane.showMessageDialog(homeFrame, inputFrame.getBrand() + " Added To The Garage Successfully");
+                    } catch (NumberFormatException err) {
+                        JOptionPane.showMessageDialog(inputFrame, "ERROR: " + err.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    } catch (VehicleExceptions err) {
+                        String errRepresnt = "";
+                        for(int i = 0; i < err.getErrors().getSize(); i++) errRepresnt += err.getErrors().get(i) + (i == err.getErrors().getSize()-1 ? "": "\n");
+                        JOptionPane.showMessageDialog(inputFrame, "ERROR(s):\n" + errRepresnt, "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
                 break;
             case "CANCEL":
+                homeFrame.setLocation(inputFrame.getLocation());
                 inputFrame.dispose();
                 homeFrame.setVisible(true);
                 break;
             case "BACK":
+                homeFrame.setLocation(infoFrame.getLocation());
                 infoFrame.dispose();
                 homeFrame.setVisible(true);
                 break;
