@@ -24,20 +24,23 @@ public class InputFrame extends JFrame {
     private final String SUVText = "Is FOUR-WHEEL-DRIVE?";
     private final String offRoadText = "Has Suspention Kit?";
 
+    private JCheckBox offRoadBox = new JCheckBox();
+
 
     JButton saveButton = new JButton("SAVE");
     JButton cancelButton = new JButton("CANCEL");
 
 
-
-    public InputFrame() {
+    JPanel mainPanel = new JPanel();
+    JPanel buttonsPanel = new JPanel();
+    public InputFrame(ActionListener listener) {
+        setListener(listener);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(Design.DIMENSION);
         setLocationRelativeTo(null);
 //        setResizable(false);
         setTitle("ADD A VEHICLE");
 
-        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         mainPanel.setBorder(BorderFactory.createEmptyBorder(70, 140,70,140));
@@ -58,34 +61,45 @@ public class InputFrame extends JFrame {
 
 
 
-        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         saveButton.setActionCommand("SAVE");
+        saveButton.setBackground(Design.BUTTONS_COLOR);
+        saveButton.setForeground(Design.BUTTONS_TEXTS_COLOR);
         cancelButton.setActionCommand("CANCEL");
+        cancelButton.setBackground(Design.BUTTONS_COLOR);
+        cancelButton.setForeground(Design.BUTTONS_TEXTS_COLOR);
+
 
 
         buttonsPanel.add(saveButton);
         buttonsPanel.add(cancelButton);
         buttonsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        checkBox.setFont(new Font(Design.FONT, Font.PLAIN, 17));
-        checkBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        checkBox.setText(sedanText);
-        mainPanel.add(checkBox);
-        mainPanel.add(Box.createVerticalStrut(30));
+        addCheckBox(mainPanel, checkBox, sedanText, true);
+        addCheckBox(mainPanel,offRoadBox, offRoadText, false);
 
+
+        mainPanel.add(Box.createVerticalStrut(30));
         mainPanel.add(buttonsPanel);
 
 
         add(mainPanel);
 
+        setColor(Design.COLOR);
     }
 
     public void addField(JPanel panel, JTextField field, String text) {
 
         JLabel label = new JLabel(text);
+        label.setForeground(Design.TEXTS_COLOR);
         label.setFont(new Font(Design.FONT, Font.PLAIN, 17));
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        field.setBackground(Design.BUTTONS_COLOR);
+        field.setForeground(Design.BUTTONS_TEXTS_COLOR);
+        field.setCaretColor(Design.BUTTONS_TEXTS_COLOR);
+        field.setMargin(new Insets(0,5,0,5));
         field.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         field.setPreferredSize(new Dimension(Integer.MAX_VALUE, 30));
@@ -108,21 +122,55 @@ public class InputFrame extends JFrame {
     }
 
     public void updateTypeFields(String selected) {
-        if (selected.equals("Sedan")) checkBox.setText(sedanText);
-        else if (selected.equals("SUV")) checkBox.setText(SUVText);
-        else if (selected.equals("Off-Road SUV")) checkBox.setText(offRoadText);
+        if (selected.equals("Sedan")) {
+            checkBox.setText(sedanText);
+            hideCheckBox(offRoadBox);
+        }
+        else if (selected.equals("SUV")) {
+            checkBox.setText(SUVText);
+            hideCheckBox(offRoadBox);
+        }
+        else if (selected.equals("Off-Road SUV")) {
+            checkBox.setText(SUVText);
+            showCheckBox(offRoadBox);
+        }
         checkBox.setSelected(false);
+        offRoadBox.setSelected(false);
     }
 
     public String getActiveType() {
         return switch(checkBox.getText()) {
             case sedanText -> "sedan";
-            case SUVText -> "suv";
-            case offRoadText -> "offRoad";
+            case SUVText -> offRoadBox.isVisible() ? "offRoad": "suv";
             default -> null;
         };
     }
 
+    private void addCheckBox(JPanel panel, JCheckBox box, String text, boolean visible) {
+        box.setFont(new Font(Design.FONT, Font.PLAIN, 17));
+        box.setForeground(Design.TEXTS_COLOR);
+        box.setAlignmentX(Component.LEFT_ALIGNMENT);
+        box.setText(text);
+        panel.add(box);
+        panel.add(Box.createVerticalStrut(5));
+        if(!visible) box.setVisible(false);
+    }
+
+    private void showCheckBox(JCheckBox box) {
+        box.setVisible(true);
+    }
+    private void hideCheckBox(JCheckBox box) {
+        box.setVisible(false);
+    }
+
+
+
+    private void setColor(Color color) {
+        mainPanel.setBackground(color);
+        buttonsPanel.setBackground(color);
+        checkBox.setBackground(color);
+        offRoadBox.setBackground(color);
+    }
 
     public String getBrand() {return brandIn.getText();}
     public String getColor() {return colorIn.getText();}
@@ -131,5 +179,6 @@ public class InputFrame extends JFrame {
     public int getHP() throws NumberFormatException {return Integer.parseInt(hpIn.getText());}
     public int getPlate() throws NumberFormatException {return Integer.parseInt(plateIn.getText());}
     public boolean getCheckBox() {return checkBox.isSelected();}
+    public boolean getOffRoadBox() {return offRoadBox.isSelected();}
 
 }
