@@ -8,8 +8,8 @@ public class OffRoadSUV extends SUV {
     }
 
     //prints the detailed information specific to the Off-Road SUV
-    public String printInfo() {
-        return "Type: Off-Road SUV\nBrand: " + getBrand() + "\nColor: " + getColor() + "\nAll Wheel Drive?: " + (isAWD ? "Yes" : "No") + "  |  Has Suspention Kit?: " + (hasSuspensionKit ? "Yes" : "No") +
+    public String displayInfo() {
+        return "Type: Off-Road SUV\nBrand: " + getBrand() + "\nColor: " + getColor() + "\nAll Wheel Drive?: " + (isAWD ? "Yes" : "No") + "\nHas Suspention Kit?: " + (hasSuspensionKit ? "Yes" : "No") +
         "\nEngine: " + getEngine().getCylinders() + " Cylinders, " + getEngine().getSize() + "L, " + getEngine().getHP() +
         "hp\nPlate Number: " + getPlateNum() + "\nStatus: [" + (isReady() ? "Ready To Go" : "Not Ready") + "]";
     }

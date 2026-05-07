@@ -20,6 +20,8 @@ public class HomeFrame extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        panel.setBackground(Design.COLOR);
+
         panel.setBorder(BorderFactory.createEmptyBorder(70, 140,70,140));
 
         setButtonSettings(addButton);
@@ -48,6 +50,8 @@ public class HomeFrame extends JFrame {
     }
 
     private void setButtonSettings(JButton b) {
+        b.setBackground(Design.BUTTONS_COLOR);
+        b.setForeground(Color.WHITE);
         b.setAlignmentX(Component.CENTER_ALIGNMENT);
         b.setFont(new Font(Design.FONT, Font.PLAIN, 22));
         b.setPreferredSize(new Dimension(400,50));

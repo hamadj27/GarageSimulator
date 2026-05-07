@@ -49,7 +49,7 @@ public class Garage {
     public String displayAllVehicle(){
         String txt = "";
         for(int i = 0; i<vehicle.getSize();i++){
-            txt += "Vehicle (" + (i + 1) + "):\n\n" + vehicle.get(i).displayInfo() + "\n--------------------------------------------\n";
+            txt += "Vehicle (" + (i + 1) + "):\n\n" + vehicle.get(i).displayInfo() + (i == vehicle.getSize()-1 ? "" : "\n--------------------------------------------\n");
         } return txt;
     }
 

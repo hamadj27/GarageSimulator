@@ -7,15 +7,11 @@ public class Controller implements ActionListener {
     private InputFrame inputFrame;
     private InfoFrame infoFrame;
     private Garage garage;
-    public Controller(HomeFrame homeFrame, InputFrame inputFrame, InfoFrame infoFrame, Garage garage) {
+    public Controller(HomeFrame homeFrame, Garage garage) {
         this.homeFrame = homeFrame;
-        this.inputFrame = inputFrame;
-        this.infoFrame = infoFrame;
         this.garage = garage;
 
         homeFrame.setListener(this);
-        inputFrame.setListener(this);
-        infoFrame.setListener(this);
     }
 
 
@@ -23,7 +19,9 @@ public class Controller implements ActionListener {
         switch (e.getActionCommand()) {
             case "ADD":
                 homeFrame.setVisible(false);
+                inputFrame = new InputFrame(this);
                 inputFrame.setLocation(homeFrame.getLocation());
+                inputFrame.setSize(homeFrame.getSize());
                 inputFrame.setVisible(true);
                 break;
             case "REMOVE":
@@ -72,9 +70,10 @@ public class Controller implements ActionListener {
             case "DISPLAY":
                 if (garage.getNumOfVehicles() <= 0) JOptionPane.showMessageDialog(homeFrame, "There Are No Vehicles In The Garage To Display","ERROR", JOptionPane.ERROR_MESSAGE);
                 else {
-                    infoFrame.setInfo(garage.displayAllVehicle());
+                    infoFrame = new InfoFrame(this, garage.displayAllVehicle());
                     homeFrame.setVisible(false);
                     infoFrame.setLocation(homeFrame.getLocation());
+                    infoFrame.setSize(homeFrame.getSize());
                     infoFrame.setVisible(true);
                 }
                 break;
@@ -89,9 +88,10 @@ public class Controller implements ActionListener {
                         else if (inputFrame.getActiveType() == "suv")
                             garage.addVehicle(new SUV(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox()));
                         else if (inputFrame.getActiveType() == "offRoad")
-                            garage.addVehicle(new Sedan(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox()));
+                            garage.addVehicle(new OffRoadSUV(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox(), inputFrame.getOffRoadBox()));
 
                         homeFrame.setLocation(inputFrame.getLocation());
+                        homeFrame.setSize(inputFrame.getSize());
                         inputFrame.dispose();
                         homeFrame.setVisible(true);
                         JOptionPane.showMessageDialog(homeFrame, inputFrame.getBrand() + " Added To The Garage Successfully");
@@ -105,11 +105,13 @@ public class Controller implements ActionListener {
                 break;
             case "CANCEL":
                 homeFrame.setLocation(inputFrame.getLocation());
+                homeFrame.setSize(inputFrame.getSize());
                 inputFrame.dispose();
                 homeFrame.setVisible(true);
                 break;
             case "BACK":
                 homeFrame.setLocation(infoFrame.getLocation());
+                homeFrame.setSize(infoFrame.getSize());
                 infoFrame.dispose();
                 homeFrame.setVisible(true);
                 break;

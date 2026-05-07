@@ -9,31 +9,36 @@ public class InfoFrame extends JFrame {
     private JScrollPane scroll = new JScrollPane(textArea);
     private JButton backButton = new JButton("BACK");
 
-    private String info;
-
-    public InfoFrame() {
+    public InfoFrame(ActionListener listener, String info) {
+        setListener(listener);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(Design.DIMENSION);
         setLocationRelativeTo(null);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        panel.setBackground(Design.COLOR);
+
         panel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
 
         title = new JLabel("VEHICLE CURRENTLY IN GARAGE");
         title.setFont(new Font(Design.FONT, Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(Design.TITLE_COLOR);
 
 
         textArea.setEditable(false);
         textArea.setFont(new Font(Design.FONT, Font.PLAIN, 22));
         textArea.setMargin(new Insets(8,8,8,8));
         textArea.setText(info);
+        textArea.setForeground(Design.TEXTAREA_COLOR);
+        textArea.setBackground(Design.SCROLL_COLOR);
 
         scroll.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.setFont(new Font("Arial", Font.PLAIN, 17));
+        backButton.setBackground(Design.BUTTONS_COLOR);
+        backButton.setForeground(Design.BUTTONS_TEXTS_COLOR);
 
 
         panel.add(title);
@@ -43,14 +48,9 @@ public class InfoFrame extends JFrame {
         panel.add(backButton);
         backButton.setActionCommand("BACK");
         add(panel);
-
     }
 
     public void setListener(ActionListener listener) {
         backButton.addActionListener(listener);
-    }
-
-    public void setInfo(String info) {
-        textArea.setText(info);
     }
 }

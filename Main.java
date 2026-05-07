@@ -4,11 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
         HomeFrame homeFrame = new HomeFrame();
-        InputFrame inputFrame = new InputFrame();
-        InfoFrame infoFrame = new InfoFrame();
         Garage garage = new Garage();
 
-        Controller controller = new Controller(homeFrame, inputFrame, infoFrame, garage);
+        Controller controller = new Controller(homeFrame, garage);
 
         homeFrame.setVisible(true);
       }
