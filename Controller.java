@@ -19,15 +19,15 @@ public class Controller implements ActionListener {
         switch (e.getActionCommand()) {
             case "ADD":
                 homeFrame.setVisible(false);
-                inputFrame = new InputFrame(this);
-                inputFrame.setLocation(homeFrame.getLocation());
-                inputFrame.setSize(homeFrame.getSize());
+                inputFrame = new InputFrame(this, homeFrame);
                 inputFrame.setVisible(true);
                 break;
             case "REMOVE":
                 try {
-                    String plate = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Remove").strip();
-                    Vehicle removed = garage.removeVehicle(Integer.parseInt(plate));
+                    String plate = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Remove");
+                    if(plate == null) return;
+
+                    Vehicle removed = garage.removeVehicle(Integer.parseInt(plate.strip()));
                     if (removed != null)
                         JOptionPane.showMessageDialog(homeFrame, removed.getBrand() + " Have Been Removed Successfully");
                     else
@@ -38,9 +38,10 @@ public class Controller implements ActionListener {
                 break;
             case "SEARCH":
                 try {
-                    String target = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Search For").strip();
+                    String target = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Search For");
+                    if(target == null) return;
 
-                    Vehicle found = garage.searchVehicle(Integer.parseInt(target), 0);
+                    Vehicle found = garage.searchVehicle(Integer.parseInt(target.strip()), 0);
                     if (found == null) {
                         JOptionPane.showMessageDialog(homeFrame,"No Car Found With" + (target.length() > 4 ? " That Plate Number" :" A Plate Number [" + target + "]"),"ERROR", JOptionPane.ERROR_MESSAGE);
                     } else {
@@ -52,9 +53,10 @@ public class Controller implements ActionListener {
                 break;
             case "MAINTAIN":
                 try {
-                    String car = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Maintain").strip();
+                    String car = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Maintain");
+                    if(car == null) return;
 
-                    Vehicle v = garage.maintainVehicle(Integer.parseInt(car));
+                    Vehicle v = garage.maintainVehicle(Integer.parseInt(car.strip()));
                     if (v == null) {
                         JOptionPane.showMessageDialog(homeFrame, "No Car Found With" + (car.length() > 4 ? " That Plate Number" :" A Plate Number [" + car + "]"), "ERROR", JOptionPane.ERROR_MESSAGE);
                     } else {
@@ -70,10 +72,8 @@ public class Controller implements ActionListener {
             case "DISPLAY":
                 if (garage.getNumOfVehicles() <= 0) JOptionPane.showMessageDialog(homeFrame, "There Are No Vehicles In The Garage To Display","ERROR", JOptionPane.ERROR_MESSAGE);
                 else {
-                    infoFrame = new InfoFrame(this, garage.displayAllVehicle());
+                    infoFrame = new InfoFrame(this, garage.displayAllVehicle(), homeFrame);
                     homeFrame.setVisible(false);
-                    infoFrame.setLocation(homeFrame.getLocation());
-                    infoFrame.setSize(homeFrame.getSize());
                     infoFrame.setVisible(true);
                 }
                 break;

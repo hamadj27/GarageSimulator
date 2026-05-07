@@ -33,12 +33,11 @@ public class InputFrame extends JFrame {
 
     JPanel mainPanel = new JPanel();
     JPanel buttonsPanel = new JPanel();
-    public InputFrame(ActionListener listener) {
+    public InputFrame(ActionListener listener, JFrame reference) {
         setListener(listener);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(Design.DIMENSION);
-        setLocationRelativeTo(null);
-//        setResizable(false);
+        setSize(reference.getSize());
+        setLocation(reference.getLocation());
         setTitle("ADD A VEHICLE");
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));

@@ -9,11 +9,12 @@ public class InfoFrame extends JFrame {
     private JScrollPane scroll = new JScrollPane(textArea);
     private JButton backButton = new JButton("BACK");
 
-    public InfoFrame(ActionListener listener, String info) {
+    public InfoFrame(ActionListener listener, String info, JFrame reference) {
         setListener(listener);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(Design.DIMENSION);
-        setLocationRelativeTo(null);
+        setTitle("ALL VEHICLES IN THE GARAGE");
+        setSize(reference.getSize());
+        setLocation(reference.getLocation());
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -21,7 +22,7 @@ public class InfoFrame extends JFrame {
 
         panel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
 
-        title = new JLabel("VEHICLE CURRENTLY IN GARAGE");
+        title = new JLabel("VEHICLES CURRENTLY IN GARAGE");
         title.setFont(new Font(Design.FONT, Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setForeground(Design.TITLE_COLOR);

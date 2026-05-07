@@ -7,11 +7,11 @@ public class Garage {
     private LinkedList<Vehicle> vehicle;
 
     public Garage () {
-        loadDataFromFile();
+        loadData();
     }
     public boolean addVehicle(Vehicle v){
         boolean status = vehicle.addLast(v);
-        saveDataToFile();
+        saveData();
         return status;
     }
     public Vehicle removeVehicle(int plateNum){
@@ -19,7 +19,7 @@ public class Garage {
             Vehicle current = vehicle.get(i);
             if(plateNum==current.getPlateNum()){
                 vehicle.removeAt(i);
-                saveDataToFile();
+                saveData();
                 return current;
             }
         }return null;
@@ -42,7 +42,7 @@ public class Garage {
         if (equipments.getHealth() < 10) equipments.performMaintenance();
         equipments.use();
         targetVehicle.performMaintenance();
-        saveDataToFile();
+        saveData();
         return targetVehicle;
     }
 
@@ -56,7 +56,7 @@ public class Garage {
     public int getNumOfVehicles() {return vehicle.getSize();}
 
 
-    private void loadDataFromFile() {
+    private void loadData() {
         if(!file.exists()) {
             vehicle = new LinkedList<>();
             equipments = new GarageEquipments();
@@ -74,11 +74,11 @@ public class Garage {
 
 
 
-    private void saveDataToFile() {
+    private void saveData() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
             out.writeObject(vehicle);
             out.writeObject(equipments);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -8,13 +8,12 @@ public class HomeFrame extends JFrame {
     private JButton removeButton = new JButton("Remove Vehicle");
     private JButton searchButton = new JButton("Search For Vehicle");
     private JButton maintainButton = new JButton("Maintain Vehicle");
-    private JButton displayButton = new JButton("Display All Vehicle");
+    private JButton displayButton = new JButton("Display All Vehicles");
 
     public HomeFrame() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(Design.DIMENSION);
         setLocationRelativeTo(null);
-//        setResizable(false);
         setTitle("MIKE GARAGE MANAGEMENT");
 
         JPanel panel = new JPanel();
