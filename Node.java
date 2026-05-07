@@ -1,5 +1,6 @@
 import java.io.Serializable;
 
+// node used by the linked list implementation
 public class Node<T> implements Serializable {
     private T data;
     private Node next;

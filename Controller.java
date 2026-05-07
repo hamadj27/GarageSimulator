@@ -2,11 +2,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// this class controls what happens when buttons are clicked
 public class Controller implements ActionListener {
     private HomeFrame homeFrame;
     private InputFrame inputFrame;
     private InfoFrame infoFrame;
     private Garage garage;
+
+    // sets up the controller with the home screen and garage
     public Controller(HomeFrame homeFrame, Garage garage) {
         this.homeFrame = homeFrame;
         this.garage = garage;
@@ -15,15 +18,18 @@ public class Controller implements ActionListener {
     }
 
 
+    // runs when any button is clicked
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "ADD":
+                // hide home and show the add vehicle screen
                 homeFrame.setVisible(false);
                 inputFrame = new InputFrame(this, homeFrame);
                 inputFrame.setVisible(true);
                 break;
             case "REMOVE":
                 try {
+                    // ask for plate number to remove
                     String plate = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Remove");
                     if(plate == null) return;
 
@@ -38,6 +44,7 @@ public class Controller implements ActionListener {
                 break;
             case "SEARCH":
                 try {
+                    // ask for plate number to search
                     String target = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Search For");
                     if(target == null) return;
 
@@ -53,6 +60,7 @@ public class Controller implements ActionListener {
                 break;
             case "MAINTAIN":
                 try {
+                    // ask for plate number to maintain
                     String car = JOptionPane.showInputDialog("Please Enter The Vehicle Plate Number To Maintain");
                     if(car == null) return;
 
@@ -70,6 +78,7 @@ public class Controller implements ActionListener {
 
                 break;
             case "DISPLAY":
+                // show all vehicles if there are any
                 if (garage.getNumOfVehicles() <= 0) JOptionPane.showMessageDialog(homeFrame, "There Are No Vehicles In The Garage To Display","ERROR", JOptionPane.ERROR_MESSAGE);
                 else {
                     infoFrame = new InfoFrame(this, garage.displayAllVehicle(), homeFrame);
@@ -78,11 +87,13 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "TYPE":
+                // update the input form based on vehicle type selected
                 inputFrame.updateTypeFields((String)(((JComboBox<String>)e.getSource()).getSelectedItem()));
 
                 break;
             case "SAVE":
                     try {
+                        // save the new vehicle based on type
                         if (inputFrame.getActiveType() == "sedan")
                             garage.addVehicle(new Sedan(inputFrame.getBrand(), inputFrame.getColor(), inputFrame.getEngineSize(), inputFrame.getCylinders(), inputFrame.getHP(), inputFrame.getPlate(), inputFrame.getCheckBox()));
                         else if (inputFrame.getActiveType() == "suv")
@@ -98,18 +109,21 @@ public class Controller implements ActionListener {
                     } catch (NumberFormatException err) {
                         JOptionPane.showMessageDialog(inputFrame, "ERROR: " + err.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     } catch (VehicleExceptions err) {
+                        // show all errors if any
                         String errRepresnt = "";
                         for(int i = 0; i < err.getErrors().getSize(); i++) errRepresnt += err.getErrors().get(i) + (i == err.getErrors().getSize()-1 ? "": "\n");
                         JOptionPane.showMessageDialog(inputFrame, "ERROR(s):\n" + errRepresnt, "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 break;
             case "CANCEL":
+                // go back to home without saving
                 homeFrame.setLocation(inputFrame.getLocation());
                 homeFrame.setSize(inputFrame.getSize());
                 inputFrame.dispose();
                 homeFrame.setVisible(true);
                 break;
             case "BACK":
+                // go back from info screen to home
                 homeFrame.setLocation(infoFrame.getLocation());
                 homeFrame.setSize(infoFrame.getSize());
                 infoFrame.dispose();

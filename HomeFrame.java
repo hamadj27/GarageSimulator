@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.EventListener;
 
+// home window with main action buttons
 public class HomeFrame extends JFrame {
     private JButton addButton = new JButton("Add Vehicle");
     private JButton removeButton = new JButton("Remove Vehicle");
@@ -42,12 +43,14 @@ public class HomeFrame extends JFrame {
     }
 
 
+    // add a button and spacing if it's not the last one
     private void addButton(JPanel panel, JButton button, String cmd, boolean last) {
         panel.add(button);
         button.setActionCommand(cmd);
         if(!last) panel.add(Box.createVerticalStrut(15));
     }
 
+    // apply styles to a button
     private void setButtonSettings(JButton b) {
         b.setBackground(Design.BUTTONS_COLOR);
         b.setForeground(Color.WHITE);
@@ -57,6 +60,7 @@ public class HomeFrame extends JFrame {
         b.setMaximumSize(new Dimension(400,50));
     }
 
+    // connect the main buttons to the controller
     public void setListener(ActionListener listener) {
         addButton.addActionListener(listener);
         removeButton.addActionListener(listener);

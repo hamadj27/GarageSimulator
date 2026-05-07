@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+// simple screen to show all vehicles
 public class InfoFrame extends JFrame {
 
     private JLabel title;
@@ -51,6 +52,7 @@ public class InfoFrame extends JFrame {
         add(panel);
     }
 
+    // connect the back button to the controller
     public void setListener(ActionListener listener) {
         backButton.addActionListener(listener);
     }

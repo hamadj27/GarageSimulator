@@ -26,6 +26,8 @@ public abstract class Vehicle implements Maintainable, Serializable {
     //getters:
 
     public String getBrand() {return brand;}
+
+    // validate and set the brand name
     private void setBrand(String brand, LinkedList<String> errors) {
         for(int i = 0; i < brand.length(); i++) {
             if(Character.isDigit(brand.charAt(i))) {
@@ -38,6 +40,8 @@ public abstract class Vehicle implements Maintainable, Serializable {
     }
 
     public String getColor() {return color;}
+
+    // validate and set the color value
     private void setColor(String color, LinkedList<String> errors) {
         for(int i = 0; i < color.length(); i++)  {
             if(Character.isDigit(color.charAt(i))) {
@@ -52,6 +56,8 @@ public abstract class Vehicle implements Maintainable, Serializable {
     public Engine getEngine() {return engine;}
 
     public int getPlateNum() {return plateNum;}
+
+    // validate and set the plate number
     private void setPlateNum(int p, LinkedList<String> errors) {
         if (p < 0) errors.addLast("Plate number cannot be negative.");
         else if (p == 0) errors.addLast("Plate number cannot be ZERO.");
