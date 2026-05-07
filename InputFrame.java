@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+// screen for adding a new vehicle to the garage
 public class InputFrame extends JFrame {
     private final String[] types = {"Sedan", "SUV", "Off-Road SUV"};
     private JComboBox<String> typeIn = new JComboBox<>(types);
@@ -33,12 +34,11 @@ public class InputFrame extends JFrame {
 
     JPanel mainPanel = new JPanel();
     JPanel buttonsPanel = new JPanel();
-    public InputFrame(ActionListener listener) {
+    public InputFrame(ActionListener listener, JFrame reference) {
         setListener(listener);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(Design.DIMENSION);
-        setLocationRelativeTo(null);
-//        setResizable(false);
+        setSize(reference.getSize());
+        setLocation(reference.getLocation());
         setTitle("ADD A VEHICLE");
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -89,6 +89,7 @@ public class InputFrame extends JFrame {
         setColor(Design.COLOR);
     }
 
+    // add a labeled text field to the form
     public void addField(JPanel panel, JTextField field, String text) {
 
         JLabel label = new JLabel(text);
@@ -115,12 +116,14 @@ public class InputFrame extends JFrame {
     }
 
 
+    // set all buttons listeners to the controller
     public void setListener(ActionListener listener) {
         typeIn.addActionListener(listener);
         saveButton.addActionListener(listener);
         cancelButton.addActionListener(listener);
     }
 
+    // update checkbox options when vehicle type changes
     public void updateTypeFields(String selected) {
         if (selected.equals("Sedan")) {
             checkBox.setText(sedanText);
@@ -138,6 +141,7 @@ public class InputFrame extends JFrame {
         offRoadBox.setSelected(false);
     }
 
+    // read the currently selected vehicle type
     public String getActiveType() {
         return switch(checkBox.getText()) {
             case sedanText -> "sedan";
@@ -146,6 +150,7 @@ public class InputFrame extends JFrame {
         };
     }
 
+    // add a checkbox option
     private void addCheckBox(JPanel panel, JCheckBox box, String text, boolean visible) {
         box.setFont(new Font(Design.FONT, Font.PLAIN, 17));
         box.setForeground(Design.TEXTS_COLOR);
@@ -165,6 +170,7 @@ public class InputFrame extends JFrame {
 
 
 
+    // match background colors to all components
     private void setColor(Color color) {
         mainPanel.setBackground(color);
         buttonsPanel.setBackground(color);

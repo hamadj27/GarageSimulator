@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// design constants used by all UI screens
 public class Design {
     public static final String FONT = "Bahnschrift";
     public static final Dimension DIMENSION = new Dimension(1152, 864);

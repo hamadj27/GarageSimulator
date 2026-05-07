@@ -11,6 +11,7 @@ public class LinkedList<T> implements Serializable {
         size = 0;
     }
 
+    // append a value to the end of the list
     public boolean addLast(T o) {
         Node node = new Node(o);
         if (isEmpty()){
@@ -26,6 +27,7 @@ public class LinkedList<T> implements Serializable {
         return true;
     }
 
+    // remove the last element from the list
     public boolean removeLast() {
         if (isEmpty()) return false;
         if (size == 1) {
@@ -40,6 +42,7 @@ public class LinkedList<T> implements Serializable {
 
     }
 
+    // remove the first element from the list
     public boolean removeFirst() {
         if (isEmpty()) return false;
         if (size == 1) {
@@ -53,6 +56,7 @@ public class LinkedList<T> implements Serializable {
         return true;
     }
 
+    // remove an item at a given index
     public boolean removeAt(int i) {
         if (i < 0 || i >= size) return false;
         Node target = getNode(i);
@@ -68,6 +72,7 @@ public class LinkedList<T> implements Serializable {
         return true;
     }
 
+    // find a node by index
     private Node getNode(int n) {
         if (n < 0 || n >= size) return null;
         Node current = head;
